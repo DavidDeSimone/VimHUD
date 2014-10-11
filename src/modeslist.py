@@ -24,3 +24,5 @@ class ModesList:
         content = modeFile.readlines();
         for line in content:
             modearray.append(line);
+            
+        return modearray;
