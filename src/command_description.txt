@@ -4,7 +4,7 @@ c   change command  cursor motion command
 d   delete command  cursor motion command
 e   end of word
 f   find character after cursor in current line character to find
-g   UNBOUND
+g   back
 h   move left one character
 i   enter insertion mode before current character   text, ESC
 j   move down one line
@@ -14,12 +14,12 @@ m   mark current line and position  mark character tag (a-z)
 n   repeat last search
 o   open line below and enter insertion mode    text, ESC
 p   put buffer after cursor
-q   UNBOUND
+q   record
 r   replace single character at cursor  replacement character expected
 s   substitute single character with new text   text, ESC
 t   same as "f" but cursor moves to just before found character character to find
 u   undo
-v   UNBOUND
+v   visual mode
 w   move foreward one word
 x   delete single character
 y   yank command    cursor motion command
@@ -45,7 +45,7 @@ R   replace mode - replaces through end of current line, then inserts   text, ES
 S   substitute entire line - deletes line, enters insertion mode    text, ESC
 T   backwards version of "t"    character to find
 U   restores line to state when cursor was moved into it
-V   UNBOUND
+V   visual block
 W   foreward Word
 X   delete backwards single character
 Y   yank entire line
@@ -60,14 +60,14 @@ $   move to end of line
 %   match nearest [],(),{} on line, to its match (same line or others)
 ^   move to first non-whitespace character of line
 &   repeat last ex substitution (":s ...") not including modifiers
-*   UNBOUND
+*   highlight current word
 (   move to previous sentence
 )   move to next sentence
 \   UNBOUND
 |   move to column zero
 -   move to first non-whitespace of previous line
 _   similar to "^" but uses numeric prefix oddly
-=   UNBOUND
+=   fix indentation
 +   move to first non-whitespace of next line
 [   move to previous "{...}" section    "["
 ]   move to next "{...}" section    "]"
