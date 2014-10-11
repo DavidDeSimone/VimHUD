@@ -108,6 +108,15 @@ _   similar to "^" but uses numeric prefix oddly
 ^U  up half screen
 ^V  UNBOUND
 ^W  UNBOUND
+^W s :split
+^W n  :new
+^W ^  open new window with previously edited file
+^W c  :clo close last window
+^W o  close all but current window
+^W j,k,l,h  move cursor to window same movement as move keys
+^W p    move cursor to previous window
+^W +,-   increase/decrease window size
+^W =   uniform window size
 ^X  UNBOUND
 ^Y  scroll text down (cursor doesn't move unless it has to)
 ^Z  suspend program
@@ -116,4 +125,3 @@ _   similar to "^" but uses numeric prefix oddly
 ^]  use word at cursor to lookup function in tags file, edit that file/code
 ^^  switch file buffers
 ^_  UNBOUND
-^?  (DELETE) UNBOUND}}}}
