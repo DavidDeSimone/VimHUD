@@ -23,22 +23,35 @@ class Mode:
         print 'Parsing..'
 
         frontWindow = 0
-        endWindow = 0
-        print 'Test ' + toParse[0:0]
+        endWindow = 1
 
 
         while frontWindow < len(toParse) and endWindow < len(toParse):
-            if self.isCommand(toParse[frontWindow:endWindow]) and endWindow - frontWindow <= 5:
+            print frontWindow
+            print endWindow 
+
+            print toParse[frontWindow:endWindow]
+
+
+            if self.isCommand(toParse[frontWindow:endWindow]) and endWindow - frontWindow <= 5: 
+                #if the current window is a command
+                #within the window length
+                print 'isCommand'
                 prev = toParse[frontWindow:endWindow]
                 endWindow += 1
             elif prev != '':
+                #if we are not extending a current string
+                print 'Ending TOK'
+                print prev
                 self.tokens.append(prev)
                 frontWindow = endWindow + 1
-                endWindow = frontWindow
+                endWindow = frontWindow + 1
                 prev = ''
             else:
+                #else we are ending a command
+                print 'else'
                 frontWindow += 1
-                endWindow = frontWindow
+                endWindow = frontWindow + 1
                 prev = ''
         
         self.tokens = tokens
