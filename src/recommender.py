@@ -27,7 +27,7 @@ def load_user_stats(user_stats):
         user_stats[line[0]] = math.exp(-int(line[1])/200.0)#learn constant??
 
 def combine_features(usefullness, user_stats, recent_stats):
-    assert(len(usefullness) == len(user_stats) and len(user_stats) == len(recent_stats))
+    #assert(len(usefullness) == len(user_stats) and len(user_stats) == len(recent_stats))
     probabilities = list()
     for key in usefullness.keys():
         probabilities.append((usefullness[key]+recent_stats[key])*recent_stats[key])

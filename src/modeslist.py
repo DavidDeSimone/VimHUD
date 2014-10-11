@@ -18,8 +18,8 @@ class ModesList:
         for modeStr in str:
             mode = Mode(modeStr)
             self.Modes.append(mode)
-        
-    #Reads the modes list from disk and 
+
+    #Reads the modes list from disk and
     #returns a string array
     def readModes(self):
         modearray = [];
@@ -35,5 +35,5 @@ class ModesList:
 
 
             modearray.append(line.rstrip());
-            
+
         return modearray;
