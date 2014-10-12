@@ -59,4 +59,3 @@
 :set	Show changed options.
 :set all	Show all options.
 :set x ?	Show value of option x.
-

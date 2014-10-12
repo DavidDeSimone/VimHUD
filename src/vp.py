@@ -22,7 +22,7 @@ class Parser:
 
     def parseStr(self):
         for mode in self.ModesList.Modes:
-           
+
             #Parse and process the commands for the mode
             print self.toParse
             mode.parse()
@@ -36,13 +36,13 @@ class Parser:
     def printTokens(self):
         for mode in self.ModesList.Modes:
             tokList = mode.tokens
-            
+
             print 'Printing ' + mode.name
             for tok in tokList:
                 print 'Token ' + tok
 
 
-# Create the parser for the input file 
+# Create the parser for the input file
 parse = Parser(sys.argv[1])
 parse.parseStr()
 parse.printTokens()

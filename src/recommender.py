@@ -2,10 +2,10 @@ import math
 import string
 import random
 
-usefullness_file_name= "usefullness.txt"
-user_stats_file_name = "user_stats.txt"
-command_description_file_name = "command.txt"
-command_description_insert_file_name = "command_description_insert.txt"
+usefullness_file_name= "/home/eric/hackru/VimParser/src/usefullness.txt"
+user_stats_file_name = "/home/eric/hackru/VimParser/src/user_stats.txt"
+command_description_file_name = "/home/eric/hackru/VimParser/src/command.txt"
+command_description_insert_file_name = "/home/eric/hackru/VimParser/src/command_description_insert.txt"
 
 
 def load_stats():
@@ -29,10 +29,6 @@ def load_usefull(usefulness):
     usefulness_file = open(usefullness_file_name, 'r')
     for line in usefulness_file:
         line = string.split(line, '\t')
-<<<<<<< HEAD
-=======
-        print line[0]
->>>>>>> d5d12e0ee6147db3f7de2372e645dde05fea6e3c
         usefulness[line[0]] = int(line[1])
 
 def load_user_stats(user_stats):
@@ -60,12 +56,20 @@ def combine_features(usefullness, user_stats, recent_stats):
             return usefullness.keys()[i]
     return usefullness.keys()[len(probabilities)-1]
 
+def test():
+    usefullness, user_stats = load_stats()
+    desc = load_description()
+    recent_stats = usefullness
+    random =  combine_features(usefullness, user_stats, recent_stats)
+    return str(random) + ": " + str(desc[random])
+
+
 def main():
     usefullness, user_stats = load_stats()
     desc = load_description()
     recent_stats = usefullness
     random =  combine_features(usefullness, user_stats, recent_stats)
-    print str(random) + " " + str(desc[random])
+    print str(random) + ": " + str(desc[random])
 
 if __name__ == "__main__":
     main()

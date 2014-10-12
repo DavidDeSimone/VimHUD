@@ -20,14 +20,14 @@ class ModesList:
         for modeStr in str:
 
             #Create the string for the mode
-            toParse = self.getModedString(modeStr, unModedToParse) 
+            toParse = self.getModedString(modeStr, unModedToParse)
 
             #Passes the mode, and the array of string to parse
             mode = Mode(modeStr, toParse)
             self.Modes.append(mode)
 
     #Parses the string for the current mode
-    #and returns 
+    #and returns
     def getModedString(self, modeStr, unModedToParse):
         ret = []
 
@@ -41,7 +41,7 @@ class ModesList:
             delimMarker = 1
         else:
             delimMarker = 0
-         
+
 
         listDelim = getModeTokens(unModedToParse)
 
@@ -49,7 +49,7 @@ class ModesList:
         for i in xrange(delimMarker, len(listDelim), 2):
             print "toToken " + listDelim[i]
             ret.append(listDelim[i])
-            
+
         return ret
 
     #Seperates the string into 'mode' blocks
@@ -57,7 +57,7 @@ class ModesList:
     def getModeTokens(unModedToParse):
         prev = 0
         size = len(unModedToParse)
-        
+
         mode = 'insert'
 
         #Array of string tokens to return
@@ -71,15 +71,15 @@ class ModesList:
                 if i - 1 >= 0 and i - 1 < len(unModedToParse):
                     ret.append(unModedToParse[back:(i - 1)]
                 prev = i + 1
-            if char == 'I' and mode == 'command'
+                if char == 'I' and mode == 'command':
                 mode = 'insert'
                 if i - 1 >= 0 and i - 1 < len(unModedToParse):
                     ret.append(unModedToParse[back:(i-1)]
                 prev = i + 1
 
-    
 
-    #Reads the modes list from disk and 
+
+    #Reads the modes list from disk and
     #returns a string array
     def readModes(self):
         modearray = [];
