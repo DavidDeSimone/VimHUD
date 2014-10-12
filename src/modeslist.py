@@ -55,7 +55,7 @@ class ModesList:
     #Seperates the string into 'mode' blocks
     # for command and insert mode
     def getModeTokens(unModedToParse):
-        back = 0
+        prev = 0
         size = len(unModedToParse)
         
         mode = 'insert'
@@ -70,12 +70,12 @@ class ModesList:
                 mode = 'command'
                 if i - 1 >= 0 and i - 1 < len(unModedToParse):
                     ret.append(unModedToParse[back:(i - 1)]
-                back = i + 1
+                prev = i + 1
             if char == 'I' and mode == 'command'
                 mode = 'insert'
                 if i - 1 >= 0 and i - 1 < len(unModedToParse):
                     ret.append(unModedToParse[back:(i-1)]
-                back = i + 1
+                prev = i + 1
 
     
 
