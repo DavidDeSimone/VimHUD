@@ -4,7 +4,8 @@ import random
 
 usefullness_file_name= "usefullness.txt"
 user_stats_file_name = "user_stats.txt"
-user_regexs_file_name = "user_regexs_file_name.txt"
+#user_regexs_file_name = "user_regexs_file_name.txt"
+user_regexs_file_name = "user_long_stats.txt"
 command_description_file_name = "command.txt"
 command_description_insert_file_name = "command_description_insert.txt"
 
@@ -66,6 +67,7 @@ def combine_features(usefullness, user_stats, recent_stats, regexs):
                 return usefullness.keys()[i]
         return usefullness.keys()[len(probabilities)-1]
     except:
+        print "asdfdf"
         return usefullness.keys()[0]#not really handling need to do something
 
 
