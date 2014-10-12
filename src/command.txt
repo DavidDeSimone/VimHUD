@@ -60,8 +60,11 @@ $	move to end of line
 *	highlight current word
 (	move to previous sentence
 )	move to next sentence
-{   move to beginning of file
-}   move to end of file
+[	move to previous section
+]	move to next section
+'	something with marks TODO
+{	move to beginning of file
+}	move to end of file
 \	UNBOUND
 |	move to column zero
 -	move to first non-whitespace of previous line
@@ -70,12 +73,12 @@ _	similar to "^" but uses numeric prefix oddly
 +	move to first non-whitespace of next line
 ;	repeat last "f", "F", "t", or "T" command
 `	move to marked line, memorized column	character tag (a-z)
-:	ex-submode	ex command
+:	ex-submode
 ~	reverse case of current character and move cursor forward
 ,	reverse direction of last "f", "F", "t", or "T" command
 .	repeat last text-changing command
-/	search forward	search string, ESC or CR
->	indent command	cursor motion command
+/	search forward
+>	indent command
 ?	search backward search string, ESC or CR
 ^A	UNBOUND
 ^B	back (up) one screen
@@ -106,9 +109,9 @@ _	similar to "^" but uses numeric prefix oddly
 ^W c	:clo close last window
 ^W o	close all but current window
 ^W j,k,l,h	move cursor to window same movement as move keys
-^W p	  move cursor to previous window
+^W p	move cursor to previous window
 ^W +,-	increase/decrease window size
-^W =	 uniform window size
+^W =	uniform window size
 ^X	UNBOUND
 ^Y	scroll text down (cursor doesn't move unless it has to)
 ^Z	suspend program
