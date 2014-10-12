@@ -39,9 +39,9 @@ class Mode:
                     endWindow += 1
                     
                     #if we reach the end of the string
-                    if endWindow >= len (toParse):
+                    if endWindow > len (toParse):
                         self.tokens.append(prev)
-                        prev = ''
+                        #prev = ''
 
                 elif prev != '':
                     #if we are not extending a current string
