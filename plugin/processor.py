@@ -13,11 +13,14 @@ class Processor:
     #Passed two arguments
     #   mode, the current moade for the string being parsed
     #   toParse, the string to be parsed for regexs
+    #   sugg, the suggested command to use instead of the
+    #   key commands used
     def __init__(self, mode, toParse):
         self.mode = mode
         self.toParse = toParse
         self.regexs = []
         self.desc = []
+        self.sugg = []
 
     #Reads in the list of regexs from disk
     #and checks to see if they are contained in
@@ -31,17 +34,75 @@ class Processor:
         for regex in self.regexs:
             regexp = re.compile(regex)
             if regexp.search(self.toParse) is not None:
-                print 'FOUND REGEX, CALLING FOO()'
+                self.getSuggestion(regex)
+
+
+
+    def getSuggestion(self, regex):
+        for i in xrange(0, len(self.regexs)):
+            if regex == self.regexs[i]:
+                for sug in self.sugg[i]:
+                    self.recordFreq(sug)
+
 
     #Function used to reading regexs in from disk
     #Regexs are found in <mode>_regex.txt with the following format
     #<regular expression>\t<single line description of regex>
     def processRegex(self, regexFull):
+        print regexFull
         for line in regexFull:
+            #We ignore all lines begininng with '#'
             if line[0] != '#':
                 ls = string.split(line, '\t')
-
+                print ls
                 self.regexs.append(ls[0])
-                self.desc.append(ls[1])
+                self.desc.append(ls[2])
+                #self.sugg.append(ls[2])
+
+                suggs = []
+
+                for i in xrange(3, len(ls)):
+                        suggs.append(ls[i].rstrip())
+                        print 'Sugg ' + ls[i]
+
+                self.sugg.append(suggs)
 
 
+    #Records the frequency of suggestions
+    def recordFreq(self, suggestion):
+        f = open('user_long_stats.txt', 'r+')
+        print suggestion
+        lines = f.readlines()
+
+        lineToWrite = []
+
+        for line in lines:
+            if(line[0] != '#'):
+                tabsep = string.split(line, '\t')
+
+                if len(tabsep) == 2:
+                    reg = tabsep[0]
+                    freq = tabsep[1]
+
+                    if reg == suggestion:
+                        print 'Found ' + reg
+                        freq_int = int(freq)
+                        freq_int += 1
+                        freq = str(freq_int) + '\n'
+                        
+                    ltr = ""
+                    ltr += reg + '\t'
+                    ltr += freq
+
+                    lineToWrite.append(ltr)
+
+        f.seek(0)
+        for ln in lineToWrite:
+            f.write(ln)
+
+
+
+        f.close()
+
+p = Processor("command", "lllllll")
+p.process()
