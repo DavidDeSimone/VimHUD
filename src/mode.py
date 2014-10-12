@@ -26,7 +26,6 @@ class Mode:
         endWindow = 1
 
 
-<<<<<<< HEAD
         while frontWindow < len(toParse) and endWindow < len(toParse):
             print frontWindow
             print endWindow
@@ -59,14 +58,13 @@ class Mode:
 
     def process(self):
         print 'processing, actually do something here maybe??????'
-=======
         for x in xrange(0, len(self.toParseArry)):
             toParse = self.toParseArry[x]
 
 
             while frontWindow < len(toParse) and endWindow < len(toParse):
 
-                if self.isCommand(toParse[frontWindow:endWindow]) and endWindow - frontWindow <= 10: 
+                if self.isCommand(toParse[frontWindow:endWindow]) and endWindow - frontWindow <= 10:
                     #if the current window is a command
                     #within the window length
                     prev = toParse[frontWindow:endWindow]
@@ -82,9 +80,8 @@ class Mode:
                     endWindow += 1
                     #endWindow = frontWindow + 1
                     prev = ''
-        
+
         #self.tokens = tokens
->>>>>>> d5d12e0ee6147db3f7de2372e645dde05fea6e3c
 
     #Tests if the given string is in the command list
     def isCommand(self, str):
