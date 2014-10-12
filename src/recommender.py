@@ -29,6 +29,10 @@ def load_usefull(usefulness):
     usefulness_file = open(usefullness_file_name, 'r')
     for line in usefulness_file:
         line = string.split(line, '\t')
+<<<<<<< HEAD
+=======
+        print line[0]
+>>>>>>> d5d12e0ee6147db3f7de2372e645dde05fea6e3c
         usefulness[line[0]] = int(line[1])
 
 def load_user_stats(user_stats):

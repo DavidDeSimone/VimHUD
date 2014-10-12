@@ -14,7 +14,7 @@ class Parser:
         self.toParse = str;
 
         #An object that stores an array of all modes
-        self.ModesList = ModesList()
+        self.ModesList = ModesList(self.toParse)
 
         #The list of commands parsed from the string
         self.tokens = [];
@@ -24,10 +24,8 @@ class Parser:
         for mode in self.ModesList.Modes:
            
             #Parse and process the commands for the mode
-            print 'Parsing...'
             print self.toParse
-            mode.parse(self.toParse)
-            mode.process()
+            mode.parse()
             strs = mode.tokens
 
             #Extract the tokens for the mode
@@ -36,8 +34,12 @@ class Parser:
                self.tokens.append(str)
 
     def printTokens(self):
-        for x in xrange(0, len(self.tokens)):
-            print self.tokens[x]
+        for mode in self.ModesList.Modes:
+            tokList = mode.tokens
+            
+            print 'Printing ' + mode.name
+            for tok in tokList:
+                print 'Token ' + tok
 
 
 # Create the parser for the input file 
