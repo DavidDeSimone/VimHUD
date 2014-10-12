@@ -25,8 +25,8 @@ vim.buffers[2].append("%s"%x)
 EOF
 endfunction
 
-"autocmd CursorHold * call Timer()
-"function! Timer()
-      "call feedkeys("f\e")
-      "call Update()
-"endfunction
+autocmd CursorHold * call Timer()
+function! Timer()
+      call feedkeys("f\e")
+      call Update()
+endfunction

@@ -44,8 +44,20 @@ class Parser:
             for tok in tokList:
                 print 'Token ' + tok
 
+    def update():
+        f = open('~/.vimlog', 'r+')
+
+        lines = f.readlines()
+        
+        parse = Parser(lines[0])
+        parse.parseStr()
+
+        f.seek(0)
+        f.write('')
+
+
 
 # Create the parser for the input file
-parse = Parser(sys.argv[1])
-parse.parseStr()
-parse.printTokens()
+#parse = Parser(sys.argv[1])
+#parse.parseStr()
+#parse.printTokens()
