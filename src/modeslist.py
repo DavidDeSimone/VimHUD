@@ -25,8 +25,6 @@ class ModesList:
             #Passes the mode, and the array of string to parse
             mode = Mode(modeStr, toParse)
             self.Modes.append(mode)
-    
-
 
     #Parses the string for the current mode
     #and returns 
@@ -97,5 +95,5 @@ class ModesList:
 
 
             modearray.append(line.rstrip());
-            
+
         return modearray;
