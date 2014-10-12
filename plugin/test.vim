@@ -19,6 +19,8 @@ endif
 python << EOF
 import vim
 import recommender
+import Parser
+Parser.update()
 x = recommender.test()
 del vim.buffers[2][0]
 vim.buffers[2].append("%s"%x)

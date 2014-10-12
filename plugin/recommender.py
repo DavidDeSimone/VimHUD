@@ -44,7 +44,7 @@ def load_user_stats(user_stats):
     user_stats_file = open(user_stats_file_name, 'r')
     for line in user_stats_file:
         line = string.split(line, '\t')
-        user_stats[line[0]] = math.exp(-int(line[1])/200.0)#learn constant??
+        user_stats[line[0]] = math.exp(-int(line[1])/150.0)#learn constant??
 
 
 def combine_features(usefullness, user_stats, recent_stats, regexs):
