@@ -4,7 +4,7 @@ c	change command
 d	delete command
 e	end of word
 f	find character after cursor in current line character to find
-g	back
+ge	back a word
 h	move left one character
 i	enter insertion mode before current character
 j	move down one line
@@ -60,6 +60,8 @@ $	move to end of line
 *	highlight current word
 (	move to previous sentence
 )	move to next sentence
+{   move to beginning of file
+}   move to end of file
 \	UNBOUND
 |	move to column zero
 -	move to first non-whitespace of previous line

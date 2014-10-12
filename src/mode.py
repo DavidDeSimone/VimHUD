@@ -28,12 +28,12 @@ class Mode:
 
         while frontWindow < len(toParse) and endWindow < len(toParse):
             print frontWindow
-            print endWindow 
+            print endWindow
 
             print toParse[frontWindow:endWindow]
 
 
-            if self.isCommand(toParse[frontWindow:endWindow]) and endWindow - frontWindow <= 5: 
+            if self.isCommand(toParse[frontWindow:endWindow]) and endWindow - frontWindow <= 5:
                 #if the current window is a command
                 #within the window length
                 print 'isCommand'
@@ -53,7 +53,7 @@ class Mode:
                 frontWindow += 1
                 endWindow = frontWindow + 1
                 prev = ''
-        
+
         self.tokens = tokens
 
     def process(self):
@@ -82,4 +82,4 @@ class Mode:
             #by space
             self.commands.append(list[0])
 
-    
+
