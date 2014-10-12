@@ -46,17 +46,19 @@ class Parser:
 
     def update():
         f = open('~/.vimlog', 'r+')
-
+        print 'File Opened'
         lines = f.read()
         
         parse = Parser(lines)
         parse.parseStr()
 
+        'Cleaning File...'
         f.seek(0)
         f.truncate()
+        f.close()
 
 
-
+update()
 # Create the parser for the input file
 #parse = Parser(sys.argv[1])
 #parse.parseStr()

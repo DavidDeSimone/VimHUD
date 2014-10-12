@@ -77,7 +77,6 @@ class Processor:
         lineToWrite = []
 
         for line in lines:
-            if(line[0] != '#'):
                 tabsep = string.split(line, '\t')
 
                 if len(tabsep) == 2:
@@ -104,5 +103,5 @@ class Processor:
 
         f.close()
 
-p = Processor("command", "lllllll")
+p = Processor("command", "lllll")
 p.process()
