@@ -47,9 +47,9 @@ class Parser:
     def update():
         f = open('~/.vimlog', 'r+')
 
-        lines = f.readlines()
+        lines = f.read()
         
-        parse = Parser(lines[0])
+        parse = Parser(lines)
         parse.parseStr()
 
         f.seek(0)
