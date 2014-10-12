@@ -5,59 +5,51 @@ import string
 # Each class has:
 #     A starting symbol that signifies its beginning
 #     A string which signifies it's name
+#     An array that contains the strings for the command mode
 class Mode:
 
-    def __init__(self, name):
+    def __init__(self, name, toParseArry):
         self.name = name
         self.tokens = []
-        self.process()
         self.commands = []
         self.fillCommands()
+        self.toParseArry = toParseArry
 
     #Parses the string for command tokens under the following scheme
     #Looks at starting character, tests to see if it is in the command list
     #TODO rest of scheme
-    def parse(self, toParse):
+    def parse(self):
         prev = ''
         tokens = []
-        print 'Parsing..'
 
         frontWindow = 0
         endWindow = 1
 
 
-        while frontWindow < len(toParse) and endWindow < len(toParse):
-            print frontWindow
-            print endWindow 
-
-            print toParse[frontWindow:endWindow]
+        for x in xrange(0, len(self.toParseArry)):
+            toParse = self.toParseArry[x]
 
 
-            if self.isCommand(toParse[frontWindow:endWindow]) and endWindow - frontWindow <= 5: 
-                #if the current window is a command
-                #within the window length
-                print 'isCommand'
-                prev = toParse[frontWindow:endWindow]
-                endWindow += 1
-            elif prev != '':
-                #if we are not extending a current string
-                print 'Ending TOK'
-                print prev
-                self.tokens.append(prev)
-                frontWindow = endWindow + 1
-                endWindow = frontWindow + 1
-                prev = ''
-            else:
-                #else we are ending a command
-                print 'else'
-                frontWindow += 1
-                endWindow = frontWindow + 1
-                prev = ''
+            while frontWindow < len(toParse) and endWindow < len(toParse):
+
+                if self.isCommand(toParse[frontWindow:endWindow]) and endWindow - frontWindow <= 10: 
+                    #if the current window is a command
+                    #within the window length
+                    prev = toParse[frontWindow:endWindow]
+                    endWindow += 1
+                elif prev != '':
+                    #if we are not extending a current string
+                    self.tokens.append(prev)
+                    frontWindow = endWindow + 1
+                    endWindow = frontWindow + 1
+                    prev = ''
+                else:
+                    #else we are ending a command
+                    endWindow += 1
+                    #endWindow = frontWindow + 1
+                    prev = ''
         
-        self.tokens = tokens
-
-    def process(self):
-        print 'processing, actually do something here maybe??????'
+        #self.tokens = tokens
 
     #Tests if the given string is in the command list
     def isCommand(self, str):
@@ -80,6 +72,7 @@ class Mode:
 
             #Append the first token when tokenized
             #by space
+            print list[0]
             self.commands.append(list[0])
 
     
