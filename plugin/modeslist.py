@@ -76,7 +76,7 @@ class ModesList:
             print char
 
             #If we see the marker for command mode
-            if char == '^[' and mode == 'insert':
+            if char == 3 and mode == 'insert':
                 #Set the mode to command mode
                 mode = 'command'
 
