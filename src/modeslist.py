@@ -27,7 +27,7 @@ class ModesList:
             self.Modes.append(mode)
 
     #Parses the string for the current mode
-    #and returns 
+    #and returns the list of strings for each mode
     def getModedString(self, modeStr, unModedToParse):
         ret = []
 
@@ -43,7 +43,7 @@ class ModesList:
             delimMarker = 0
          
 
-        listDelim = getModeTokens(unModedToParse)
+        listDelim = self.getModeTokens(unModedToParse)
 
         #listDelim = re.split('^C I', unModedToParse)
         for i in xrange(delimMarker, len(listDelim), 2):
@@ -54,11 +54,13 @@ class ModesList:
 
     #Seperates the string into 'mode' blocks
     # for command and insert mode
-    def getModeTokens(unModedToParse):
-        prev = 0
+    def getModeTokens(self, unModedToParse):
+        back = 0
         size = len(unModedToParse)
         
         mode = 'insert'
+
+        print mode
 
         #Array of string tokens to return
         ret = []
@@ -66,17 +68,34 @@ class ModesList:
         for i in xrange(0, len(unModedToParse)):
             char = unModedToParse[i]
             print char
-            if char == '^C' and mode == 'insert':
-                mode = 'command'
-                if i - 1 >= 0 and i - 1 < len(unModedToParse):
-                    ret.append(unModedToParse[back:(i - 1)]
-                prev = i + 1
-            if char == 'I' and mode == 'command'
-                mode = 'insert'
-                if i - 1 >= 0 and i - 1 < len(unModedToParse):
-                    ret.append(unModedToParse[back:(i-1)]
-                prev = i + 1
 
+            #If we see the marker for command mode
+            if char == 'c' and mode == 'insert':
+               
+                #Set the mode to command mode
+                mode = 'command'
+
+                #If we have a valid window to look at
+                ret.append(unModedToParse[back:i])
+                
+                #Slip the window forward
+                back = i + 1
+
+            #If we see the marker for insert mode
+            if char == 'I' and mode == 'command':
+
+                #Set the mode to insert
+                mode = 'insert';
+
+                #If we have a valid window to look at
+                ret.append(unModedToParse[back:(i)])
+                
+                #Slip the window forward
+                back = i + 1;
+
+
+        ret.append(unModedToParse[back:len(unModedToParse)])
+        return ret
     
 
     #Reads the modes list from disk and 
