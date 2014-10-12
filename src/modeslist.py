@@ -3,6 +3,7 @@
 import string
 import re
 from mode import Mode
+from processor import Processor
 
 class ModesList:
     def __init__(self, unModedToParse):
@@ -21,6 +22,13 @@ class ModesList:
 
             #Create the string for the mode
             toParse = self.getModedString(modeStr, unModedToParse)
+
+
+            #Parse the strings for certain regular expressions
+            for regchk in toParse:
+                print 'Checking ' + regchk
+                p = Processor(modeStr, regchk)
+                p.process()
 
             #Passes the mode, and the array of string to parse
             mode = Mode(modeStr, toParse)
@@ -60,8 +68,6 @@ class ModesList:
 
         mode = 'insert'
 
-        print mode
-
         #Array of string tokens to return
         ret = []
 
@@ -71,18 +77,8 @@ class ModesList:
 
             #If we see the marker for command mode
             if char == 'c' and mode == 'insert':
-
                 #Set the mode to command mode
                 mode = 'command'
-                if i - 1 >= 0 and i - 1 < len(unModedToParse):
-                    ret.append(unModedToParse[back:(i - 1)]
-                prev = i + 1
-                if char == 'I' and mode == 'command':
-                mode = 'insert'
-                if i - 1 >= 0 and i - 1 < len(unModedToParse):
-                    ret.append(unModedToParse[back:(i-1)]
-                prev = i + 1
-
 
                 #If we have a valid window to look at
                 ret.append(unModedToParse[back:i])

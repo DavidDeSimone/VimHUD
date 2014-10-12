@@ -1,7 +1,7 @@
 import sys
 from mode import Mode
 from modeslist import ModesList
-
+from processor import Processor
 
 
 # Parser class
@@ -31,6 +31,9 @@ class Parser:
             #Extract the tokens for the mode
             #and add them to the complete list
             for str in strs:
+
+               print 'String ' + str
+
                self.tokens.append(str)
 
     def printTokens(self):

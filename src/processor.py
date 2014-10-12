@@ -44,8 +44,4 @@ class Processor:
                 self.regexs.append(ls[0])
                 self.desc.append(ls[1])
 
-p = Processor("command", "llllll")
-p.process()
-
-
 
