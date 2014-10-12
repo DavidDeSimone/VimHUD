@@ -54,7 +54,7 @@ class Mode:
                     endWindow += 1
                     #endWindow = frontWindow + 1
                     prev = ''
-        
+
         #self.tokens = tokens
 
     #Tests if the given string is in the command list
@@ -89,4 +89,4 @@ class Mode:
             #by space
             self.commands.append(list[0])
 
-    
+
