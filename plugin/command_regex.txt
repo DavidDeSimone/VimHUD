@@ -1,5 +1,7 @@
 #Parsing file for command regex
 #
 #Regex		Description			Suggestion
-l{3,15}		Pressing left excessivly	Shift-A
-h{3,15}		Pressing right excessivly	Shift-I
+l{3,15}		Pressing right excessivly	A	a	$
+h{3,15}		Pressing left excessivly	I	0	ge
+k{3, 15}		Pressing up excessivly	O	g
+j{3, 15}		Pressing down excessivly	G
