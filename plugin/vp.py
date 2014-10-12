@@ -2,8 +2,9 @@ import sys
 from mode import Mode
 from modeslist import ModesList
 from processor import Processor
+from os.path import expanduser
 
-
+home = expanduser("~")
 # Parser class
 # As Vim is a modular editor, we associate a 'Mode' object
 # with each given Vim mode. That object finds text written
@@ -44,30 +45,10 @@ class Parser:
             for tok in tokList:
                 print 'Token ' + tok
 
-    def update(self):
-        f = open('~/.vimlog', 'r+')
-        print 'File Opened'
-        lines = f.read()
-        
-        parse = Parser(lines)
-        parse.parseStr()
+   
 
 
-        for mode in self.ModesList.Modes:
-            tokList = mode.tokens
-
-            for tok in tokList:
-                self.addFreq(tok)
-
-
-
-        'Cleaning File...'
-        f.seek(0)
-        f.truncate()
-        f.close()
-
-
-        def addFreq(self):
+    def addFreq(self):
             f = open('user_short_stats.txt')
 
             self.clean(f)
@@ -93,7 +74,7 @@ class Parser:
                     
 
 
-        def clean(self, f):
+    def clean(self, f):
             lines = f.readlines()
 
             lrt = ""
@@ -115,7 +96,35 @@ class Parser:
 
 
 
+def update():
+        print 'Calling Update...'
+        print home
+        f = open(home + '/.vimlog', 'r+')
+        print 'File Opened'
+        lines = f.read()
+ 
+
+        print lines
+        parse = Parser(lines)
+        parse.parseStr()
+
+
+        for mode in parse.ModesList.Modes:
+            tokList = mode.tokens
+
+            for tok in tokList:
+                parse.addFreq(tok)
+
+
+
+        print 'Cleaning File...'
+        f.seek(0)
+        f.truncate()
+        f.close()
+
+
 # Create the parser for the input file
-parse = Parser('BACKSPACE^CwqIHELLO')
-parse.parseStr()
-parse.printTokens()
+#parse = Parser('BACKSPACE^CwqIHELLO')
+#parse.parseStr()
+#parse.printTokens()
+update()

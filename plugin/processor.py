@@ -103,5 +103,5 @@ class Processor:
 
         f.close()
 
-p = Processor("insert", "qqqaaasdasdasa")
-p.process()
+#p = Processor("insert", "qqqaaasdasdasa")
+#p.process()
