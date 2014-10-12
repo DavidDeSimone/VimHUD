@@ -57,16 +57,27 @@ class ModesList:
     #Seperates the string into 'mode' blocks
     # for command and insert mode
     def getModeTokens(unModedToParse):
-        front = 0
         back = 0
         size = len(unModedToParse)
-
         
+        mode = 'insert'
 
-        while front < size:
-            
-            
+        #Array of string tokens to return
+        ret = []
 
+        for i in xrange(0, len(unModedToParse)):
+            char = unModedToParse[i]
+            print char
+            if char == '^C' and mode == 'insert':
+                mode = 'command'
+                if i - 1 >= 0 and i - 1 < len(unModedToParse):
+                    ret.append(unModedToParse[back:(i - 1)]
+                back = i + 1
+            if char == 'I' and mode == 'command'
+                mode = 'insert'
+                if i - 1 >= 0 and i - 1 < len(unModedToParse):
+                    ret.append(unModedToParse[back:(i-1)]
+                back = i + 1
 
     
 
