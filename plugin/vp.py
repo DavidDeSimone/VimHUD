@@ -53,7 +53,7 @@ class Parser:
         parse.parseStr()
 
         f.seek(0)
-        f.write('')
+        f.truncate()
 
 
 
