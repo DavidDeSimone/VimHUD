@@ -57,6 +57,12 @@ class Mode:
 
         #self.tokens = tokens
 
+
+    
+
+
+
+
     #Tests if the given string is in the command list
     def isCommand(self, str):
 

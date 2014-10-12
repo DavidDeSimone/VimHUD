@@ -44,7 +44,7 @@ class Parser:
             for tok in tokList:
                 print 'Token ' + tok
 
-    def update():
+    def update(self):
         f = open('~/.vimlog', 'r+')
         print 'File Opened'
         lines = f.read()
@@ -52,13 +52,69 @@ class Parser:
         parse = Parser(lines)
         parse.parseStr()
 
+
+        for mode in self.ModesList.Modes:
+            tokList = mode.tokens
+
+            for tok in tokList:
+                self.addFreq(tok)
+
+
+
         'Cleaning File...'
         f.seek(0)
         f.truncate()
         f.close()
 
 
-update()
+        def addFreq(self):
+            f = open('user_short_stats.txt')
+
+            self.clean(f)
+
+            lines = f.readlines()
+
+            for line in lines:
+               seps = string.split(line, '\t')
+                if len(line) == 2:
+                    lrt = ""
+
+                    com = seps[0]
+                    freq = seps[1]
+
+                    freq_int = int(freq) + '\t'
+                    freq_int += 1
+
+                    freq = str(freq_int) + '\n'
+
+                    lrt += com
+                    lrt += freq
+
+                    
+
+
+        def clean(self, f):
+            lines = f.readlines()
+
+            lrt = ""
+
+            for line in lines:
+                seps  = string.split(line, '\t')
+                if len(seps) == 2:
+
+                    com = seps[0]
+                    freq = seps[1]
+
+                    freq_int = 1
+                    freq = str(freq_int) = '\n'
+
+                    lrt += com + '\t'
+                    lrt += freq
+
+                    f.write(lrt)
+
+
+
 # Create the parser for the input file
 #parse = Parser(sys.argv[1])
 #parse.parseStr()
