@@ -22,7 +22,7 @@ class Processor:
     #Reads in the list of regexs from disk
     #and checks to see if they are contained in
     #the passed string toParse
-    def process():
+    def process(self):
         f = open(self.mode + '_regex.txt')
 
         regexFull = f.readlines()
@@ -30,7 +30,7 @@ class Processor:
 
         for regex in self.regexs:
             regexp = re.compile(regex)
-            if regexp.search(toParse) is not None:
+            if regexp.search(self.toParse) is not None:
                 print 'FOUND REGEX, CALLING FOO()'
 
     #Function used to reading regexs in from disk
@@ -38,7 +38,14 @@ class Processor:
     #<regular expression>\t<single line description of regex>
     def processRegex(self, regexFull):
         for line in regexFull:
-            ls = string.split(line, '\t')
+            if line[0] != '#':
+                ls = string.split(line, '\t')
 
-            self.regexs.append(ls[0])
-            self.desc.append(ls[1])
+                self.regexs.append(ls[0])
+                self.desc.append(ls[1])
+
+p = Processor("command", "llllll")
+p.process()
+
+
+
