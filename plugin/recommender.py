@@ -52,7 +52,7 @@ def combine_features(usefullness, user_stats, recent_stats, regexs):
     try:
         probabilities = list()
         for key in usefullness.keys():
-            probabilities.append((30.0*usefullness[key]+regexs[key])*recent_stats[key])
+            probabilities.append((50.0*usefullness[key]+10.0*regexs[key])*recent_stats[key])
 
         #create a cdf for the (unweighted) probabilities
         for i in xrange(1, len(probabilities)):
@@ -64,8 +64,6 @@ def combine_features(usefullness, user_stats, recent_stats, regexs):
         for i in xrange(1, len(probabilities)-1):
             if probabilities[i-1] < rv and probabilities[i] >= rv:
                 return usefullness.keys()[i]
-        if usefullness.keys()[len(probabilities)-1][1] == "UNBOUNDED":
-            combine_features(usefullness, user_stats, recent_stats, regexs)
         return usefullness.keys()[len(probabilities)-1]
     except:
         return usefullness.keys()[0]#not really handling need to do something
