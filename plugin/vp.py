@@ -76,7 +76,7 @@ class Parser:
 
             for line in lines:
                seps = string.split(line, '\t')
-                if len(line) == 2:
+               if len(line) == 2:
                     lrt = ""
 
                     com = seps[0]
@@ -106,7 +106,7 @@ class Parser:
                     freq = seps[1]
 
                     freq_int = 1
-                    freq = str(freq_int) = '\n'
+                    freq = str(freq_int) + '\n'
 
                     lrt += com + '\t'
                     lrt += freq
@@ -116,6 +116,6 @@ class Parser:
 
 
 # Create the parser for the input file
-#parse = Parser(sys.argv[1])
-#parse.parseStr()
-#parse.printTokens()
+parse = Parser('BACKSPACE^CwqIHELLO')
+parse.parseStr()
+parse.printTokens()
