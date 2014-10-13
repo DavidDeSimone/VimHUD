@@ -19,8 +19,8 @@ endif
 python << EOF
 import vim
 import recommender
-import Parser
-Parser.update()
+import vp
+vp.update()
 x = recommender.test()
 del vim.buffers[2][0]
 vim.buffers[2].append("%s"%x)
@@ -32,3 +32,5 @@ function! Timer()
       call feedkeys("f\e")
       call Update()
 endfunction
+
+:call Create()<CR>

@@ -26,7 +26,7 @@ class ModesList:
 
             #Parse the strings for certain regular expressions
             for regchk in toParse:
-                print 'Checking ' + regchk
+                print 'Checking ' + regchk + ' Mode ' + modeStr
                 p = Processor(modeStr, regchk)
                 p.process()
 
@@ -76,7 +76,7 @@ class ModesList:
             print char
 
             #If we see the marker for command mode
-            if char == 3 and mode == 'insert':
+            if char == '\x1B' and mode == 'insert':
                 #Set the mode to command mode
                 mode = 'command'
 

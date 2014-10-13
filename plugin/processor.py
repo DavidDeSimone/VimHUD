@@ -49,12 +49,12 @@ class Processor:
     #Regexs are found in <mode>_regex.txt with the following format
     #<regular expression>\t<single line description of regex>
     def processRegex(self, regexFull):
-        print regexFull
+        #print regexFull
         for line in regexFull:
             #We ignore all lines begininng with '#'
             if line[0] != '#':
                 ls = string.split(line, '\t')
-                print ls
+                #print ls
                 self.regexs.append(ls[0])
                 self.desc.append(ls[2])
                 #self.sugg.append(ls[2])
@@ -63,7 +63,7 @@ class Processor:
 
                 for i in xrange(3, len(ls)):
                         suggs.append(ls[i].rstrip())
-                        print 'Sugg ' + ls[i]
+                        #print 'Sugg ' + ls[i]
 
                 self.sugg.append(suggs)
 
@@ -71,7 +71,8 @@ class Processor:
     #Records the frequency of suggestions
     def recordFreq(self, suggestion):
         f = open('user_long_stats.txt', 'r+')
-        print suggestion
+
+        #print suggestion
         lines = f.readlines()
 
         lineToWrite = []

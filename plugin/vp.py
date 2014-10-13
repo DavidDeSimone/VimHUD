@@ -25,7 +25,7 @@ class Parser:
         for mode in self.ModesList.Modes:
 
             #Parse and process the commands for the mode
-            print self.toParse
+            #print self.toParse
             mode.parse()
             strs = mode.tokens
 
@@ -33,17 +33,17 @@ class Parser:
             #and add them to the complete list
             for str in strs:
 
-               print 'String ' + str
+             #print 'String ' + str
 
-               self.tokens.append(str)
+              self.tokens.append(str)
 
     def printTokens(self):
         for mode in self.ModesList.Modes:
             tokList = mode.tokens
 
-            print 'Printing ' + mode.name
-            for tok in tokList:
-                print 'Token ' + tok
+            #print 'Printing ' + mode.name
+            #for tok in tokList:
+                #print 'Token ' + tok
 
    
 
@@ -97,10 +97,10 @@ class Parser:
 
 
 def update():
-        print 'Calling Update...'
-        print home
+        #print 'Calling Update...'
+        #print home
         f = open(home + '/.vimlog', 'r+')
-        print 'File Opened'
+        #print 'File Opened'
         lines = f.read()
  
 
@@ -117,7 +117,7 @@ def update():
 
 
 
-        print 'Cleaning File...'
+        #print 'Cleaning File...'
         f.seek(0)
         f.truncate()
         f.close()
@@ -127,4 +127,4 @@ def update():
 #parse = Parser('BACKSPACE^CwqIHELLO')
 #parse.parseStr()
 #parse.printTokens()
-update()
+#update()
