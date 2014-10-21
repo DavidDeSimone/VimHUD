@@ -48,7 +48,7 @@ class Parser:
    
 
 
-    def addFreq(self):
+    def addFreq(self, tok):
             f = open('user_short_stats.txt')
 
             self.clean(f)
@@ -103,8 +103,6 @@ def update():
         #print 'File Opened'
         lines = f.read()
  
-
-        print lines
         parse = Parser(lines)
         parse.parseStr()
 
@@ -112,8 +110,8 @@ def update():
         for mode in parse.ModesList.Modes:
             tokList = mode.tokens
 
-            for tok in tokList:
-                parse.addFreq(tok)
+            #for tok in tokList:
+                #parse.addFreq(tok)
 
 
 

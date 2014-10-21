@@ -85,7 +85,6 @@ class Processor:
                     freq = tabsep[1]
 
                     if reg == suggestion:
-                        print 'Found ' + reg
                         freq_int = int(freq)
                         freq_int += 1
                         freq = str(freq_int) + '\n'

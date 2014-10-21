@@ -76,7 +76,7 @@ class ModesList:
             print char
 
             #If we see the marker for command mode
-            if char == '\x1B' and mode == 'insert':
+            if char == '<80><fd>`' and mode == 'insert':
                 #Set the mode to command mode
                 mode = 'command'
 

@@ -31,7 +31,7 @@ class Mode:
 
 
             while frontWindow < len(toParse) and endWindow - 1 < len(toParse):
-                print toParse[frontWindow:endWindow]
+                #print toParse[frontWindow:endWindow]
                 if self.isCommand(toParse[frontWindow:endWindow]) and endWindow - frontWindow <= 10: 
                     #if the current window is a command
                     #within the window length
@@ -66,10 +66,10 @@ class Mode:
     #Tests if the given string is in the command list
     def isCommand(self, str):
 
-        print str
+        #print str
 
         if str in self.commands:
-            print 'Found'
+         #   print 'Found'
             return True
 
         return False

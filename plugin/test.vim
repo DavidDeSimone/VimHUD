@@ -5,7 +5,7 @@ if !has('python')
 endif
 :belowright split HUD
 :set nonu
-:25winc-
+:35winc-
 :set laststatus=0
 :setlocal buftype=nofile
 :call Update()
@@ -21,12 +21,13 @@ import vim
 import recommender
 import vp
 vp.update()
+vim.buffers[2].append("j=down, k=up, l=right, h=left, Esc=normal mode, i=insert mode")
 x = recommender.test()
+del vim.buffers[2][0]
 del vim.buffers[2][0]
 vim.buffers[2].append("%s"%x)
 EOF
-endfunction
-
+endfunction 
 autocmd CursorHold * call Timer()
 function! Timer()
       call feedkeys("f\e")
