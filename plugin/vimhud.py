@@ -37,7 +37,7 @@ def readCommands(file_t):
     cmd = fillCommandList('command')
     ins = fillCommandList('insert')
 
-    print cmd
+    #print cmd
 
     for line in file_t.readlines():
         tokens = readVimTokens(line)
@@ -57,7 +57,7 @@ def readCommands(file_t):
                         se.add(lon_word)
                         x += lon_len
             
-    print se
+    #print se
     return se
 
 # Tokenizes input based on current Vim modes
@@ -71,11 +71,11 @@ def readVimTokens(str_t):
 
     for x in xrange(0, len(str_t)):
 
-        print ord(str_t[x])
+        #print ord(str_t[x])
 
         #Escape Character is 27 in ASCII
         if ord(str_t[x]) == 27:
-            print 'In Command Mode'
+            #print 'In Command Mode'
             command_mode = True
             to_add = str_t[end_i:x]
             ret_list.append(to_add)
@@ -90,8 +90,8 @@ def readVimTokens(str_t):
 
 
 
-    print 'Printing Return List'
-    print ret_list
+    #print 'Printing Return List'
+    #print ret_list
     return ret_list
 
 
