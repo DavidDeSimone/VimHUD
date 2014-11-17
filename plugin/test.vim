@@ -18,20 +18,24 @@ if !has('python')
 endif
 python << EOF
 import vim
-import recommender
-import vp
-vp.update()
-vim.buffers[2].append("j=down, k=up, l=right, h=left, Esc=normal mode, i=insert mode")
-x = recommender.test()
-del vim.buffers[2][0]
-del vim.buffers[2][0]
-vim.buffers[2].append("%s"%x)
+loadedLibs = False
+try:
+    import recommender
+    loadedLibs = True
+except ImportError:
+    print "need recommender in pythonpath"
+if loadedLibs:
+    vim.buffers[2].append("j=down, k=up, l=right, h=left, Esc=normal mode, i=insert mode")
+    x = recommender.recommend()
+    del vim.buffers[2][0]
+    del vim.buffers[2][0]
+    vim.buffers[2].append("%s"%x)
 EOF
 endfunction 
+
 autocmd CursorHold * call Timer()
 function! Timer()
-      call feedkeys("f\e")
-      call Update()
+call feedkeys("f\e")
+call Update()
 endfunction
-
-:call Create()<CR>
+:call Create()
