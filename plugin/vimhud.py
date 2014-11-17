@@ -33,34 +33,72 @@ def pullFreq(log):
 
 def readCommands(file_t):
     se = set()
-    cmd = fillCommandList()
-
+    cmd = fillCommandList('command')
+    ins = fillCommandList('insert')
 
     print cmd
 
     for line in file_t.readlines():
-        for x in xrange(0, len(line)):
-            lon_len = 0
-            lon_word = ''
+        tokens = readVimTokens(line)
 
-            for word in cmd:
-                if line[x: x + len(word)] == word:
-                    if lon_len < len(word):
-                        lon_len = len(word)
-                        lon_word = word
+        for ln in tokens:
+            for x in xrange(0, len(ln)):
+                lon_len = 0
+                lon_word = ''
 
+                for word in cmd:
+                    if ln[x: x + len(word)] == word:
+                        if lon_len < len(word):
+                            lon_len = len(word)
+                            lon_word = word
 
-            if lon_word != '':
-                se.add(lon_word)
-                x += lon_len
+                    if lon_word != '':
+                        se.add(lon_word)
+                        x += lon_len
 
-    print se
     return se
 
-def fillCommandList():
+# Tokenizes input based on current Vim modes
+# Returns an array of tokens
+def readVimTokens(str_t):
+    end_i = 0
+
+    ret_list = list()
+
+    command_mode = False
+
+    for x in xrange(0, len(str_t)):
+
+        print ord(str_t[x])
+
+        #Escape Character is 27 in ASCII
+        if ord(str_t[x]) == 27:
+            print 'In Command Mode'
+            command_mode = True
+            to_add = str_t[end_i:x]
+            ret_list.append(to_add)
+            end_i = x
+
+        elif str_t[x] == 'I' and command_mode == True:
+            command_mode = False
+            to_add = str_t[end_i:x]
+            ret_list.append(to_add)
+            end_i = x
+
+
+
+
+    print 'Printing Return List'
+    print ret_list
+    return ret_list
+
+
+# Reads in the commands for the specified modes
+#Modes for standard Vim include Insert and Command
+def fillCommandList(mode_t):
     se = set()
 
-    f = open('command.txt')
+    f = open(mode_t + '.txt')
     lines = f.readlines()
 
     for line in lines:

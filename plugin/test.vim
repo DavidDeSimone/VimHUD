@@ -5,7 +5,7 @@ if !has('python')
 endif
 :belowright split HUD
 :set nonu
-:25winc-
+:35winc-
 :set laststatus=0
 :setlocal buftype=nofile
 :call Update()
@@ -24,7 +24,6 @@ try:
     loadedLibs = True
 except ImportError:
     print "need recommender in pythonpath"
-    
 if loadedLibs:
     vim.buffers[2].append("j=down, k=up, l=right, h=left, Esc=normal mode, i=insert mode")
     x = recommender.recommend()
