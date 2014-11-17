@@ -61,7 +61,7 @@ def readCommands(file_t):
     return se
 
 # Tokenizes input based on current Vim modes
-#
+# Returns an array of tokens
 def readVimTokens(str_t):
     end_i = 0
 
