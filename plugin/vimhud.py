@@ -6,7 +6,7 @@ home = expanduser("~")
 
 def main():
     update()
-    
+
 def update():
     #Open current Vim character buffer found in home
     vimLog = open(home + '/.vimlog', 'r+')
@@ -14,7 +14,6 @@ def update():
     freqSet = pullFreq(vimLog)
     writeShortStats(freqSet)
     writeLongStats(freqSet)
-    
     vimLog.close()
 
 def pullFreq(log):
@@ -24,11 +23,11 @@ def pullFreq(log):
 
     for command in commandSet:
         if dic.has_key(command):
-            dic[command] =  int(dic[command] + 1) 
+            dic[command] =  int(dic[command] + 1)
         else:
             dic[command] = 1
 
-    
+
     return dic
 
 
@@ -48,13 +47,13 @@ def readCommands(file_t):
                 if line[x: x + len(word)] == word:
                     if lon_len < len(word):
                         lon_len = len(word)
-                        lon_word = word 
-                    
-                
+                        lon_word = word
+
+
             if lon_word != '':
                 se.add(lon_word)
                 x += lon_len
-            
+
     print se
     return se
 
@@ -68,7 +67,7 @@ def fillCommandList():
         item = string.split(line)
         se.add(item[0])
 
-    
+
     return se
 
 def diff(x1, x2):
@@ -76,10 +75,10 @@ def diff(x1, x2):
 
 def writeShortStats(freqSet):
     shortFile = open('short_term.txt', 'w')
-    
+
     emptyFile(shortFile)
     writeFile(shortFile, freqSet)
-    
+
     shortFile.close()
 
 def writeLongStats(freqSet):
@@ -87,7 +86,7 @@ def writeLongStats(freqSet):
 
     fileDict = readDict(longFile)
     merged = mergeDicts(freqSet, fileDict)
-    
+
     emptyFile(longFile)
     writeFile(longFile, merged)
 
@@ -105,7 +104,7 @@ def readDict(file_t):
         value = keyvalue[1]
 
         dic[key] = value
-        
+
     return dic
 
 def mergeDicts(freqSet, fileDict):
@@ -120,11 +119,11 @@ def mergeDicts(freqSet, fileDict):
 def emptyFile(f):
     f.seek(0)
     f.truncate()
-    
+
 def writeFile(file_t, freq_set):
     for key, value in freq_set.iteritems():
         file_t.write(key + ' ' + str(value) + '\n')
 
-        
+
 if __name__ == "__main__":
     main()
