@@ -25,11 +25,19 @@ try:
 except ImportError:
     print "need recommender in pythonpath"
 if loadedLibs:
-    vim.buffers[2].append("j=down, k=up, l=right, h=left, Esc=normal mode, i=insert mode")
+    bl = vim.buffers
+
+    for buff in bl:
+	    if str(buff) == '<buffer HUD>':
+		    HUD = buff
+
+    
+    HUD.append("j=down, k=up, l=right, h=left, Esc=normal mode, i=insert mode\n")
+    del HUD[0]
+    del HUD[0]
     x = recommender.recommend()
-    del vim.buffers[2][0]
-    del vim.buffers[2][0]
-    vim.buffers[2].append("%s"%x)
+    HUD.append("%s"%x)
+
 EOF
 endfunction 
 
