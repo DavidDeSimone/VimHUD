@@ -17,7 +17,7 @@ def update():
     vimLog.close()
 
 def pullFreq(log):
-    dic = dict()
+    dic = initDict()
 
     commandSet = readCommands(log)
 
@@ -27,7 +27,7 @@ def pullFreq(log):
         else:
             dic[command] = 1
 
-
+    
     return dic
 
 
@@ -85,9 +85,6 @@ def readVimTokens(str_t):
             ret_list.append(to_add)
             end_i = x
 
-
-
-
     #print 'Printing Return List'
     #print ret_list
     return ret_list
@@ -132,7 +129,7 @@ def writeLongStats(freqSet):
 
 
 def readDict(file_t):
-    dic = dict()
+    dic = initDict()
 
     lines = file_t.readlines()
 
@@ -144,6 +141,37 @@ def readDict(file_t):
         dic[key] = value
 
     return dic
+
+# Creates a dictionary of all python commands, with frequency
+# initalized to 0
+def initDict():
+    dict_r = dict()
+
+    #Read command-mode commands file
+    command_f = open('command.txt', 'r')
+
+    lines = command_f.readlines()
+
+    for line in lines:
+        keys = line.split()
+        key = keys[0]
+
+        dict_r[key] = 0
+
+    #Read Insert-mode command file
+    insert_f = open('insert.txt', 'r')
+    
+    lines = insert_f.readlines()
+    
+    for line in lines:
+        keys = line.split()
+        key = keys[0]
+
+        dict_r[key] = 0
+
+    return dict_r
+
+
 
 def mergeDicts(freqSet, fileDict):
     for key, value in freqSet.iteritems():
