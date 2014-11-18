@@ -33,7 +33,7 @@ def pullFreq(log):
 # Parses all of the commands VIM present in a text file
 # Returns a set containing each command present
 def readCommands(file_t):
-    se = set()
+    se = list()
     cmd = fillCommandList('command')
     ins = fillCommandList('insert')
 
@@ -59,7 +59,7 @@ def readCommands(file_t):
                                 lon_word = word
 
                         if lon_word != '':
-                            se.add(lon_word)
+                            se.append(lon_word)
                             x += lon_len
 
                 elif ln[1] == 'I':
@@ -70,9 +70,8 @@ def readCommands(file_t):
                                 lon_word = word
 
                         if long_word != '':
-                            se.add(lon_word)
+                            se.append(lon_word)
                             x += lon_len
-
 
     return se
 
