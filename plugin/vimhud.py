@@ -30,7 +30,8 @@ def pullFreq(log):
     
     return dic
 
-
+# Parses all of the commands VIM present in a text file
+# Returns a set containing each command present
 def readCommands(file_t):
     se = set()
     cmd = fillCommandList('command')
@@ -41,25 +42,42 @@ def readCommands(file_t):
     for line in file_t.readlines():
         tokens = readVimTokens(line)
 
-        for ln in tokens:
+        #Token objects are lists in the form [word, mode]
+        for tok in tokens:
+            ln = tok[0]
+            mode = tok[1]
+
             for x in xrange(0, len(ln)):
                 lon_len = 0
-                lon_word = ''
+                lon_word = ''                
 
-                for word in cmd:
-                    if ln[x: x + len(word)] == word:
-                        if lon_len < len(word):
-                            lon_len = len(word)
-                            lon_word = word
+                if mode == 'C':
+                    for word in cmd:
+                        if ln[x: x + len(word)] == word:
+                            if lon_len < len(word):
+                                lon_len = len(word)
+                                lon_word = word
 
-                    if lon_word != '':
-                        se.add(lon_word)
-                        x += lon_len
+                        if lon_word != '':
+                            se.add(lon_word)
+                            x += lon_len
+
+                elif ln[1] == 'I':
+                    for word in ins:
+                        if ln[x: x + len(word)] == word:
+                            if lon_len < len(word):
+                                lon_len = len(word)
+                                lon_word = word
+
+                        if long_word != '':
+                            se.add(lon_word)
+                            x += lon_len
+
 
     return se
 
 # Tokenizes input based on current Vim modes
-# Returns an array of tokens
+# Returns an array of tokens in the form [token, mode]
 def readVimTokens(str_t):
     end_i = 0
 
@@ -76,13 +94,13 @@ def readVimTokens(str_t):
             #print 'In Command Mode'
             command_mode = True
             to_add = str_t[end_i:x]
-            ret_list.append(to_add)
+            ret_list.append([to_add, 'C'])
             end_i = x
 
         elif str_t[x] == 'I' and command_mode == True:
             command_mode = False
             to_add = str_t[end_i:x]
-            ret_list.append(to_add)
+            ret_list.append([to_add, 'I'])
             end_i = x
 
     #print 'Printing Return List'
