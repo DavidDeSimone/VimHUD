@@ -1,11 +1,9 @@
-VimParser is used an addon for Vim built in python and VimScript, that uses Machine Learning to generate alternate ways to preform common tasks based on your previous commands.
+VimHUD is used an addon for Vim built in python and VimScript, that recommends commands for you to learn. VimHUD remembers which commands you know and can identify which commands will reduce the most amount of keystrokes and displays a new command on the bottom of your screen.
 
-Installtion instructions will be coming soon (sometime mid october). Please understand that we are still in a development state, so please bare with us and report any bugs :)
+Installation: The easiest way to install is to use pathogen. After installing pathogen clone this repo into your .vim/bundle folder. Then you need to add the following line in your .bashrc, alias vim='vim -w ~/.vimlog "$@"'
 
+Usage: TODO
 
-VimParser is modular and it's components can be used as stand alone programs under the following usage
+This is needed for VimHUD to record you keystrokes while you are in vim. This may change in the future if we find a better way of doing this.
 
- ./vp string to parse 
-Output will be in the form command1\n command2\n ...
-
-
+Please understand that we are still in a development state, so please bare with us and report any bugs :)
