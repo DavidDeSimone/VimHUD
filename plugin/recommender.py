@@ -7,11 +7,10 @@ from os.path import expanduser
 home = expanduser("~")
 plugin_path = '/.vim/bundle/VimParser/plugin/'
 usefullness_file_name= home + plugin_path + "usefullness.txt"
-user_stats_file_name = home + plugin_path + "short_term.txt"
-user_regexs_file_name = home + plugin_path + "long_term.txt"
+user_short_file_name = home + plugin_path + "short_term.txt"
+user_long_file_name = home + plugin_path + "long_term.txt"
 command_description_file_name = home + plugin_path + "command.txt"
 command_description_insert_file_name = home + plugin_path + "insert.txt"
-
 
 def load_stats():
     usefulness = dict()
@@ -29,8 +28,8 @@ def load_description():
     return description
 
 
-def load_regex_stats(stats):
-    stats_file = open(user_regexs_file_name, 'r')
+def load_long_stats(stats):
+    stats_file = open(user_long_file_name, 'r')
     for line in stats_file:
         line = string.split(line, '\t')
         stats[line[0]] = int(line[1])
@@ -43,11 +42,10 @@ def load_usefull(usefulness):
         usefulness[line[0]] = int(line[1])
 
 def load_user_stats(user_stats):
-    user_stats_file = open(user_stats_file_name, 'r')
-    for line in user_stats_file:
+    user_short_file = open(user_short_file_name, 'r')
+    for line in user_short_file:
         line = string.split(line)
         user_stats[line[0]] = math.exp(-int(line[1])/150.0)#learn constant??
-
 
 def combine_features(usefullness, user_stats, recent_stats):
     #assert(len(usefullness) == len(user_stats) and len(user_stats) == len(recent_stats))
@@ -67,7 +65,6 @@ def combine_features(usefullness, user_stats, recent_stats):
             return usefullness.keys()[i]
     return usefullness.keys()[len(probabilities)-1]
 
-
 def recommend():
     vimhud.update()
     usefullness, user_stats = load_stats()
@@ -79,9 +76,6 @@ def recommend():
     except:
         #some things dont have a description yet
         return recommend()
-
-
-
 
 def main():
     usefullness, user_stats = load_stats()
