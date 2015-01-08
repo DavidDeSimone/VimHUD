@@ -22,22 +22,21 @@ loadedLibs = False
 try:
     import recommender
     loadedLibs = True
+    if loadedLibs:
+        bl = vim.buffers
+
+        for buff in bl:
+            if str(buff) == '<buffer HUD>':
+                HUD = buff
+
+        
+        HUD.append("j=down, k=up, l=right, h=left, Esc=normal mode, i=insert mode\n")
+        del HUD[0]
+        del HUD[0]
+        x = recommender.recommend()
+        HUD.append("%s"%x)
 except ImportError:
     print "need recommender in pythonpath"
-if loadedLibs:
-    bl = vim.buffers
-
-    for buff in bl:
-	    if str(buff) == '<buffer HUD>':
-		    HUD = buff
-
-    
-    HUD.append("j=down, k=up, l=right, h=left, Esc=normal mode, i=insert mode\n")
-    del HUD[0]
-    del HUD[0]
-    x = recommender.recommend()
-    HUD.append("%s"%x)
-
 EOF
 endfunction 
 
@@ -46,4 +45,6 @@ function! Timer()
 call feedkeys("f\e")
 call Update()
 endfunction
+
+
 :call Create()
