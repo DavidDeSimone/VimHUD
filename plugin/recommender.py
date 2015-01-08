@@ -34,26 +34,26 @@ def load_user_long_stats(stats):
     stats_file = open(user_long_file_name, 'r')
     for line in stats_file:
         line = string.split(line)
-        stats[line[0]] = int(line[1])
+        stats[line[0]] = math.exp(-int(line[1])/150.0)
 
 
 def load_usefull(usefulness):
     usefulness_file = open(usefullness_file_name, 'r')
     for line in usefulness_file:
         line = string.split(line, '\t')
-        usefulness[line[0]] = int(line[1])
+        usefulness[line[0]] = 25*int(line[1])
 
 def load_user_short_stats(user_stats):
     user_short_file = open(user_short_file_name, 'r')
     for line in user_short_file:
         line = string.split(line)
-        user_stats[line[0]] = math.exp(-int(line[1])/150.0)#learn constant??
+        user_stats[line[0]] = math.exp(-int(line[1]))#learn constant??
 
-def combine_features(usefullness, user_stats, recent_stats):
+def combine_features(usefullness, user_long_stats, user_short_stats):
     #assert(len(usefullness) == len(user_stats) and len(user_stats) == len(recent_stats))
     probabilities = list()
     for key in usefullness.keys():
-        probabilities.append((50.0*usefullness[key])*recent_stats[key])
+        probabilities.append(usefullness[key]*user_short_stats[key])
 
     #create a cdf for the (unweighted) probabilities
     for i in xrange(1, len(probabilities)):
