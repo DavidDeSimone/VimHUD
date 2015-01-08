@@ -14,10 +14,12 @@ command_description_insert_file_name = home + plugin_path + "insert.txt"
 
 def load_stats():
     usefulness = dict()
-    user_stats = dict()
+    user_short_stats = dict()
+    user_long_stats = dict()
     load_usefull(usefulness)
-    load_user_stats(user_stats)
-    return usefulness, user_stats
+    load_user_short_stats(user_short_stats)
+    load_user_long_stats(user_long_stats)
+    return usefulness, user_short_stats, user_long_stats
 
 def load_description():
     description = dict()
@@ -28,10 +30,10 @@ def load_description():
     return description
 
 
-def load_long_stats(stats):
+def load_user_long_stats(stats):
     stats_file = open(user_long_file_name, 'r')
     for line in stats_file:
-        line = string.split(line, '\t')
+        line = string.split(line)
         stats[line[0]] = int(line[1])
 
 
@@ -41,7 +43,7 @@ def load_usefull(usefulness):
         line = string.split(line, '\t')
         usefulness[line[0]] = int(line[1])
 
-def load_user_stats(user_stats):
+def load_user_short_stats(user_stats):
     user_short_file = open(user_short_file_name, 'r')
     for line in user_short_file:
         line = string.split(line)
@@ -67,10 +69,10 @@ def combine_features(usefullness, user_stats, recent_stats):
 
 def recommend():
     vimhud.update()
-    usefullness, user_stats = load_stats()
+    usefullness, user_short_stats, user_long_stats = load_stats()
     desc = load_description()
     recent_stats = usefullness
-    random =  combine_features(usefullness, user_stats, recent_stats)
+    random =  combine_features(usefullness, user_short_stats, recent_stats)
     try:
         return str(random) + ": " + str(desc[random])
     except:
@@ -78,10 +80,10 @@ def recommend():
         return recommend()
 
 def main():
-    usefullness, user_stats = load_stats()
+    usefullness, user_short_stats, user_long_stats = load_stats()
     desc = load_description()
     recent_stats = usefullness
-    random =  combine_features(usefullness, user_stats, recent_stats)
+    random =  combine_features(usefullness, user_short_stats, recent_stats)
     print str(random) + ": " + str(desc[random])
 
 if __name__ == "__main__":
