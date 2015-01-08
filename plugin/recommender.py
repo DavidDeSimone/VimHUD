@@ -29,7 +29,6 @@ def load_description():
         description[line[0]] = line[1]
     return description
 
-
 def load_user_long_stats(stats):
     stats_file = open(user_long_file_name, 'r')
     for line in stats_file:
@@ -49,7 +48,7 @@ def load_user_short_stats(user_stats):
         line = string.split(line)
         user_stats[line[0]] = math.exp(-int(line[1]))#learn constant??
 
-def combine_features(usefullness, user_long_stats, user_short_stats):
+def combine_features(usefullness, user_short_stats, user_long_stats):
     #assert(len(usefullness) == len(user_stats) and len(user_stats) == len(recent_stats))
     probabilities = list()
     for key in usefullness.keys():
@@ -71,8 +70,7 @@ def recommend():
     vimhud.update()
     usefullness, user_short_stats, user_long_stats = load_stats()
     desc = load_description()
-    recent_stats = usefullness
-    random =  combine_features(usefullness, user_short_stats, recent_stats)
+    random =  combine_features(usefullness, user_short_stats, user_long_stats)
     try:
         return str(random) + ": " + str(desc[random])
     except:
@@ -82,8 +80,7 @@ def recommend():
 def main():
     usefullness, user_short_stats, user_long_stats = load_stats()
     desc = load_description()
-    recent_stats = usefullness
-    random =  combine_features(usefullness, user_short_stats, recent_stats)
+    random =  combine_features(usefullness, user_short_stats, user_long_stats)
     print str(random) + ": " + str(desc[random])
 
 if __name__ == "__main__":
