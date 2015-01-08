@@ -2,7 +2,7 @@ import math
 import string
 import random
 import vimhud
-from os.path import expanduser
+import sys
 
 home = expanduser("~")
 plugin_path = '/.vim/bundle/VimParser/plugin/'
