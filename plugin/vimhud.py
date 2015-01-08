@@ -14,6 +14,7 @@ def update():
     freqSet = pullFreq(vimLog)
     writeShortStats(freqSet)
     writeLongStats(freqSet)
+    emptyFile(vimLog)
     vimLog.close()
 
 def pullFreq(log):
@@ -27,7 +28,7 @@ def pullFreq(log):
         else:
             dic[command] = 1
 
-    
+
     return dic
 
 # Parses all of the commands VIM present in a text file
@@ -49,7 +50,7 @@ def readCommands(file_t):
 
             for x in xrange(0, len(ln)):
                 lon_len = 0
-                lon_word = ''                
+                lon_word = ''
 
                 if mode == 'C':
                     for word in cmd:
@@ -177,9 +178,9 @@ def initDict():
 
     #Read Insert-mode command file
     insert_f = open('insert.txt', 'r')
-    
+
     lines = insert_f.readlines()
-    
+
     for line in lines:
         keys = line.split()
         key = keys[0]
