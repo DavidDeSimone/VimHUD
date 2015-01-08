@@ -121,6 +121,7 @@ def fillCommandList(mode_t):
         item = string.split(line)
         se.add(item[0])
 
+
     return se
 
 def diff(x1, x2):
