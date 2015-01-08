@@ -5,7 +5,7 @@ import vimhud
 from os.path import expanduser
 
 home = expanduser("~")
-plugin_path = '/.vim/bundle/VimParser/plugin/'
+plugin_path = '/.vim/bundle/VimHUD/plugin/'
 usefullness_file_name= home + plugin_path + "usefullness.txt"
 user_short_file_name = home + plugin_path + "short_term.txt"
 user_long_file_name = home + plugin_path + "long_term.txt"

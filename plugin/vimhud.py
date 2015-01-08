@@ -3,7 +3,7 @@ import string
 import sys
 
 home = expanduser("~")
-plugin_path = '/.vim/bundle/VimParser/plugin/'
+plugin_path = '/.vim/bundle/VimHUD/plugin/'
 
 def main():
     update()
