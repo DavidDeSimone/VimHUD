@@ -33,7 +33,7 @@ def load_user_long_stats(stats):
     stats_file = open(user_long_file_name, 'r')
     for line in stats_file:
         line = string.split(line)
-        stats[line[0]] = math.exp(-int(line[1])/150.0)
+        stats[line[0]] = math.exp(-int(line[1]))
 
 
 def load_usefull(usefulness):
@@ -52,13 +52,14 @@ def combine_features(usefullness, user_short_stats, user_long_stats):
     #assert(len(usefullness) == len(user_stats) and len(user_stats) == len(recent_stats))
     probabilities = list()
     for key in usefullness.keys():
-        probabilities.append(usefullness[key]*user_short_stats[key])
+        probabilities.append(usefullness[key]*user_short_stats[key]*user_long_stats[key])
+
 
     #create a cdf for the (unweighted) probabilities
     for i in xrange(1, len(probabilities)):
         probabilities[i] = probabilities[i-1] + probabilities[i]
     #get uniform random number between 0, probabilites[len-1] to sample cdf
-    rv = random.randint(0, probabilities[len(probabilities)-1])
+    rv = random.uniform(0, probabilities[len(probabilities)-1])
     if rv <= probabilities[0]:
         return usefullness.keys()[0]
     for i in xrange(1, len(probabilities)-1):
