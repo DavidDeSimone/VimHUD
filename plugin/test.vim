@@ -8,8 +8,30 @@ endif
 :35winc-
 :set laststatus=0
 :setlocal buftype=nofile
-:call Update()
+:call Start()
 endfunction
+
+function! Start()
+if !has('python')
+    echo "error"
+    finish
+endif
+python << EOF
+import vim
+loadedLibs = False
+try:
+    import recommender
+    bl = vim.buffers
+
+    for buff in bl:
+        if str(buff) == '<buffer HUD>':
+            HUD = buff
+
+    HUD.append("j=down, k=up, l=right, h=left, Esc=normal mode, i=insert mode\n")
+except ImportError:
+    print "need recommender in pythonpath"
+EOF
+endfunction 
 
 function! Update()
 if !has('python')
@@ -21,20 +43,17 @@ import vim
 loadedLibs = False
 try:
     import recommender
-    loadedLibs = True
-    if loadedLibs:
-        bl = vim.buffers
+    bl = vim.buffers
 
-        for buff in bl:
-            if str(buff) == '<buffer HUD>':
-                HUD = buff
-
-        
-        HUD.append("j=down, k=up, l=right, h=left, Esc=normal mode, i=insert mode\n")
-        del HUD[0]
-        del HUD[0]
-        x = recommender.recommend()
-        HUD.append("%s"%x)
+    for buff in bl:
+        if str(buff) == '<buffer HUD>':
+            HUD = buff
+    
+    HUD.append("j=down, k=up, l=right, h=left, Esc=normal mode, i=insert mode\n")
+    del HUD[0]
+    del HUD[0]
+    x = recommender.recommend()
+    HUD.append("%s"%x)
 except ImportError:
     print "need recommender in pythonpath"
 EOF
@@ -45,6 +64,5 @@ function! Timer()
 call feedkeys("f\e")
 call Update()
 endfunction
-
 
 :call Create()

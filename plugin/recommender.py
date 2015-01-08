@@ -51,25 +51,21 @@ def load_user_stats(user_stats):
 
 def combine_features(usefullness, user_stats, recent_stats):
     #assert(len(usefullness) == len(user_stats) and len(user_stats) == len(recent_stats))
-    try:
-        probabilities = list()
-        for key in usefullness.keys():
-            probabilities.append((50.0*usefullness[key])*recent_stats[key])
+    probabilities = list()
+    for key in usefullness.keys():
+        probabilities.append((50.0*usefullness[key])*recent_stats[key])
 
-        #create a cdf for the (unweighted) probabilities
-        for i in xrange(1, len(probabilities)):
-            probabilities[i] = probabilities[i-1] + probabilities[i]
-        #get uniform random number between 0, probabilites[len-1] to sample cdf
-        rv = random.randint(0, probabilities[len(probabilities)-1])
-        if rv <= probabilities[0]:
-            return usefullness.keys()[0]
-        for i in xrange(1, len(probabilities)-1):
-            if probabilities[i-1] < rv and probabilities[i] >= rv:
-                return usefullness.keys()[i]
-        return usefullness.keys()[len(probabilities)-1]
-    except:
-        print "Error in Recommendation Generation"
-        return usefullness.keys()[0]#not really handling need to do something
+    #create a cdf for the (unweighted) probabilities
+    for i in xrange(1, len(probabilities)):
+        probabilities[i] = probabilities[i-1] + probabilities[i]
+    #get uniform random number between 0, probabilites[len-1] to sample cdf
+    rv = random.randint(0, probabilities[len(probabilities)-1])
+    if rv <= probabilities[0]:
+        return usefullness.keys()[0]
+    for i in xrange(1, len(probabilities)-1):
+        if probabilities[i-1] < rv and probabilities[i] >= rv:
+            return usefullness.keys()[i]
+    return usefullness.keys()[len(probabilities)-1]
 
 
 def recommend():
@@ -78,8 +74,12 @@ def recommend():
     desc = load_description()
     recent_stats = usefullness
     random =  combine_features(usefullness, user_stats, recent_stats)
-    return str(random) + ": " + str(desc[random])
-    
+    try:
+        return str(random) + ": " + str(desc[random])
+    except:
+        #some things dont have a description yet
+        return recommend()
+
 
 
 
