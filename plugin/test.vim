@@ -18,7 +18,6 @@ if !has('python')
 endif
 python << EOF
 import vim
-loadedLibs = False
 try:
     import recommender
     bl = vim.buffers
@@ -27,7 +26,7 @@ try:
         if str(buff) == '<buffer HUD>':
             HUD = buff
 
-    HUD.append("j=down, k=up, l=right, h=left, Esc=normal mode, i=insert mode\n")
+    HUD.append("j=down | k=up | l=right | h=left | Esc=normal mode | i=insert mode\n")
 except ImportError:
     print "need recommender in pythonpath"
 EOF
@@ -40,7 +39,6 @@ if !has('python')
 endif
 python << EOF
 import vim
-loadedLibs = False
 try:
     import recommender
     bl = vim.buffers
@@ -49,7 +47,7 @@ try:
         if str(buff) == '<buffer HUD>':
             HUD = buff
     
-    HUD.append("j=down, k=up, l=right, h=left, Esc=normal mode, i=insert mode\n")
+    HUD.append("j=down | k=up | l=right | h=left | Esc=normal mode | i=insert mode\n")
     del HUD[0]
     del HUD[0]
     x = recommender.recommend()
