@@ -10,7 +10,7 @@ def main():
 
 def update():
     #Open current Vim character buffer found in home
-    vimLog = open(home + '/.vimlog', 'r+')
+    vimLog = open(home + '/.vimlog', 'wr+')
 
     freqSet = pullFreq(vimLog)
     writeShortStats(freqSet)
@@ -135,7 +135,7 @@ def writeShortStats(freqSet):
     shortFile.close()
 
 def writeLongStats(freqSet):
-    longFile = open(home + plugin_path + 'long_term.txt', 'r+')
+    longFile = open(home + plugin_path + 'long_term.txt', 'wr+')
 
     fileDict = readDict(longFile)
     merged = mergeDicts(freqSet, fileDict)
